@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace TGS.Challenge
 {
@@ -21,12 +22,37 @@ namespace TGS.Challenge
 
         There are accompanying unit tests for this exercise, ensure all tests pass & make
         sure the unit tests are correct too.
-     */
+    */
+
     public class FormatNumber
     {
+        /* min value constraint */
+        private readonly int minValue = 0;
+
+        /* max value constraint */
+        private readonly int maxValue = 1000000000;
+
+        /* the thousands seperator character */
+        private readonly char thousandsSeperator = ',';
+
         public string Format(int value)
         {
-            return string.Empty;
+            /* ensure given value is within the constraints bounds */
+            if (value < minValue || value > maxValue)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            /* insert the thousands seperater */
+            StringBuilder builder = new StringBuilder(value.ToString());
+
+            for (int i = builder.Length - 3; i > 0; i -= 3)
+            {
+                builder.Insert(i, thousandsSeperator);
+            }
+
+            /* return the formatted string */
+            return builder.ToString();
         }
     }
 }
