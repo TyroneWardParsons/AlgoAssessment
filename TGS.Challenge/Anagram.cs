@@ -44,7 +44,6 @@ namespace TGS.Challenge
                 /* ignore punctuation & whitespace */
                 if (char.IsPunctuation(c) || char.IsWhiteSpace(c))
                 {
-                    characters.Remove(c);
                     continue;
                 }
 
@@ -56,7 +55,7 @@ namespace TGS.Challenge
             }
 
             /* return true if all characters found */
-            return characters.Count() == 0;
+            return characters.Count(c => !char.IsPunctuation(c) && !char.IsWhiteSpace(c)) == 0;
         }
     }
 }
